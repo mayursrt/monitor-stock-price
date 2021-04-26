@@ -4,7 +4,9 @@ import streamlit as st
 import datetime as dt
 from get_tickers import *
 
-st.write('# Stock Price Monitor')
+
+st.set_page_config(layout="centered") 
+st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
 
 exch = st.selectbox('Exchange', ['NASDAQ', 'NYSE', 'AMEX'])
 #Ticker symbol
@@ -14,7 +16,7 @@ tickerSymbol = st.selectbox('Stock Symbol', get_tickers(exch)) # You can change 
 tickerData = yf.Ticker(tickerSymbol)
 
 #Get historical data prices for this ticker
-tickerDf = tickerData.history(period='1d', start='2010-5-31', end='2021-4-24')
+tickerDf = tickerData.history(period='1d', start='2010-5-31')
 companyName = tickerData.info['longName']
 st.write(" Shown below are the stock closing price and volume of "+ "***" + companyName+"***") 
 

@@ -2,10 +2,13 @@ import pandas as pd
 import yfinance as yf
 import streamlit as st
 import datetime as dt
+from get_tickers import *
 
 st.write('# Stock Price Monitor')
 
-tickr = st.selectbox('Select', ['GOOGL','AAPL','AMZN','ACN'])
+
+
+tickr = st.selectbox('Select', get_tickers())
 
 #Ticker symbol
 tickerSymbol = tickr #You can change the ticker symbol for the name of the stock of the company you're intrested in.

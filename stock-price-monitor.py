@@ -6,14 +6,9 @@ from get_tickers import *
 
 st.write('# Stock Price Monitor')
 
-
-
-tickr = st.selectbox('Select', get_tickers())
-
+exch = st.selectbox('Exchange', ['NASDAQ', 'NYSE', 'AMEX'])
 #Ticker symbol
-tickerSymbol = tickr #You can change the ticker symbol for the name of the stock of the company you're intrested in.
-
-
+tickerSymbol = st.selectbox('Stock Symbol', get_tickers(exch)) # You can change the ticker symbol for the name of the stock of the company you're intrested in.
 
 #Data on this ticker
 tickerData = yf.Ticker(tickerSymbol)

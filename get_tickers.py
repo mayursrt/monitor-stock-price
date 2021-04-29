@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-tickersdf = pd.read_csv('tickers.csv')
+tickersdf = pd.read_csv('assets/tickers.csv')
 
 def get_tickers(exchange='NASDAQ'):
 	

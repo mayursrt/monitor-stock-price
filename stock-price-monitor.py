@@ -1,12 +1,22 @@
 import pandas as pd
 import yfinance as yf
 import streamlit as st
-import datetime as dt
+from PIL import Image
 from get_tickers import *
 
+title_container = st.beta_container()
+col1, col2 = st.beta_columns([1, 5])
+image = Image.open('assets/stock.jpg')
+with title_container:
+    with col1:
+        st.image(image)
+    with col2:
+        st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
 
-st.set_page_config(layout="centered") 
-st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
+# image = Image.open('assets/stock.jpg')
+# st.image(image, width=150)
+
+# st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
 
 exch = st.selectbox('Exchange', ['NASDAQ', 'NYSE', 'AMEX'])
 #Ticker symbol

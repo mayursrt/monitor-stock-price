@@ -13,23 +13,36 @@ with title_container:
     with col2:
         st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
 
-# image = Image.open('assets/stock.jpg')
-# st.image(image, width=150)
 
-# st.write('# Stock Price Monitor\n' + 'by Mayur Machhi')
+# User Inputs
 
-exch = st.selectbox('Exchange', ['NASDAQ', 'NYSE', 'AMEX'])
-#Ticker symbol
-tickerSymbol = st.selectbox('Stock Symbol', get_tickers(exch)) # You can change the ticker symbol for the name of the stock of the company you're intrested in.
+input_container = st.beta_container()
+col1, col2 = st.beta_columns([5, 5])
+with input_container:
+    with col1:
+        exch = st.selectbox('Exchange', ['NASDAQ', 'NYSE', 'AMEX']) # Input Exchange
+    with col2:
+        tickerSymbol = st.selectbox('Stock Symbol', get_tickers(exch)) # Input Stock Symbol
 
-#Data on this ticker
+#Data on the selected ticker
 tickerData = yf.Ticker(tickerSymbol)
 
 #Get historical data prices for this ticker
 tickerDf = tickerData.history(period='1d', start='2010-5-31')
 companyName = tickerData.info['longName']
-st.write(" Shown below are the stock closing price and volume of "+ "***" + companyName+"***") 
+st.markdown(f"Shown below are the stock closing price and volume of **{companyName}**.")
 
+my_expander = st.beta_expander('Company Details')
+with my_expander:
+	st.markdown(f"""
+Name : {companyName} \n
+Sector : {tickerData.info['sector']}\n
+City : {tickerData.info['city']}\n
+Country : {tickerData.info['country']}\n
+Full Time Employees : {tickerData.info['fullTimeEmployees']}\n
+Website : {tickerData.info['website']}\n
+Previous Close : {tickerData.info['previousClose']}\n
+	""")
 
 # Plot a line chart to show Closing Prices
 st.write("## Closing Price")
